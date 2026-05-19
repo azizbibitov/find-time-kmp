@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FindTime</string>
+    <string name="world_clocks">World Clocks</string>
+    <string name="findmeeting">Find Meeting</string>
 </resources>

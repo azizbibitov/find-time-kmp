@@ -15,6 +15,8 @@ dependencies {
     implementation(projects.sharedUI)
 
     implementation(libs.androidx.activity.compose)
+    implementation(libs.compose.material3)
+    implementation(libs.napier)
 
     implementation(libs.compose.uiToolingPreview)
     debugImplementation(libs.compose.uiTooling)
