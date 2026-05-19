@@ -2,27 +2,20 @@ import SwiftUI
 import SharedLogic
 
 struct ContentView: View {
-    @State private var showContent = false
+    @StateObject private var timezoneItems = TimezoneItems()
     var body: some View {
-        VStack {
-            Button("Click me!") {
-                withAnimation {
-                    showContent = !showContent
+        TabView {
+            TimezoneView()
+                .tabItem {
+                    Label("Time Zones", systemImage: "network")
                 }
-            }
-
-            if showContent {
-                VStack(spacing: 16) {
-                    Image(systemName: "swift")
-                        .font(.system(size: 200))
-                        .foregroundColor(.accentColor)
-                    Text("SwiftUI")
+            FindMeeting()
+                .tabItem {
+                    Label("Find Meeting", systemImage: "clock")
                 }
-                .transition(.move(edge: .leading).combined(with: .opacity))
-            }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-        .padding()
+        .tint(.white)
+        .environmentObject(timezoneItems)
     }
 }
 
