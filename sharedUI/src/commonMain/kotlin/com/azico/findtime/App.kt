@@ -34,10 +34,10 @@ fun App() {
             verticalArrangement = Arrangement.Center,
         ) {
             Button(onClick = { showContent = !showContent }) {
-                Text("Fuck me!")
+                Text("Fuck you!")
             }
             AnimatedVisibility(showContent) {
-                val greeting = remember { Greeting().greet() }
+                val greeting = remember { "response test" }
                 Column(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally,
