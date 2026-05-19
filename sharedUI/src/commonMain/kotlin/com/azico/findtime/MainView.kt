@@ -20,7 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.snapshots.SnapshotStateList
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -59,7 +59,7 @@ fun MainViewPreview() {
 @Composable
 fun MainView(actionBarFun: topBarFun = { EmptyComposable() }) {
     val showAddDialog = remember { mutableStateOf(false) }
-    val currentTimezoneStrings = remember { SnapshotStateList<String>() }
+    val currentTimezoneStrings: MutableList<String> = remember { mutableStateListOf<String>() }
     val selectedIndex = remember { mutableIntStateOf(0) }
     MyApplicationTheme {
         Scaffold(
@@ -115,8 +115,25 @@ fun MainView(actionBarFun: topBarFun = { EmptyComposable() }) {
             }
         ) { padding ->
             Box(modifier = Modifier.padding(padding)) {
-                // TODO: Replace with Dialog
-                // TODO: Replace with screens
+                if (showAddDialog.value) {
+                    AddTimeZoneDialog(
+                        onAdd = { newTimezones ->
+                            showAddDialog.value = false
+                            for (zone in newTimezones) {
+                                if (!currentTimezoneStrings.contains(zone)) {
+                                    currentTimezoneStrings.add(zone)
+                                }
+                            }
+                        },
+                        onDismiss = {
+                            showAddDialog.value = false
+                        }
+                    )
+                }
+                when (selectedIndex.intValue) {
+                    0 -> TimeZoneScreen(currentTimezoneStrings)
+                    // 1 -> FindMeetingScreen(currentTimezoneStrings)
+                }
             }
         }
     }
