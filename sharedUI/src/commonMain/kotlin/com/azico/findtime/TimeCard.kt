@@ -88,7 +88,7 @@ fun TimeCard(timezone: String, hours: Double, time: String, date: String) {
                             time,
                             style = TextStyle(
                                 color = Color.Black,
-                                fontWeight = FontWeight.Bold,fontSize = 24.sp
+                                fontWewhat meanight = FontWeight.Bold,fontSize = 24.sp
                             )
                         )
                         Text(
