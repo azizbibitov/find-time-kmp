@@ -3,6 +3,15 @@ import SharedLogic
 
 struct ContentView: View {
     @StateObject private var timezoneItems = TimezoneItems()
+
+    private var tabTintColor: Color {
+        if #available(iOS 26.0, *) {
+            return .accentColor
+        } else {
+            return .white
+        }
+    }
+
     var body: some View {
         TabView {
             TimezoneView()
@@ -14,7 +23,7 @@ struct ContentView: View {
                     Label("Find Meeting", systemImage: "clock")
                 }
         }
-        .tint(.white)
+        .tint(tabTintColor)
         .environmentObject(timezoneItems)
     }
 }

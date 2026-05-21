@@ -17,7 +17,7 @@ struct TimezoneView: View {
                         time: DateFormatter.short.string(from: currentDate),
                         date: DateFormatter.long.string(from: currentDate)
                     )
-                    .listRowInsets(.init())
+                    .listRowInsets(.init(top: 0, leading: 0, bottom: 16, trailing: 0))
                     .listRowSeparator(.hidden)
                     .listRowBackground(Color.clear)
                 }

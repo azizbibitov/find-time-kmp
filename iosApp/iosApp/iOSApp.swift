@@ -4,20 +4,20 @@ import UIKit
 @main
 struct iOSApp: App {
     init() {
-        let tabBarItemAppearance = UITabBarItemAppearance()
-        tabBarItemAppearance.configureWithDefault(for: .stacked)
-        tabBarItemAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.black]
-        tabBarItemAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.white]
-        tabBarItemAppearance.normal.iconColor = .black
-        tabBarItemAppearance.selected.iconColor = .white
+        if #unavailable(iOS 26.0) {
+            let tabBarItemAppearance = UITabBarItemAppearance()
+            tabBarItemAppearance.configureWithDefault(for: .stacked)
+            tabBarItemAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.black]
+            tabBarItemAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.white]
+            tabBarItemAppearance.normal.iconColor = .black
+            tabBarItemAppearance.selected.iconColor = .white
 
-        let appearance = UITabBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.stackedLayoutAppearance = tabBarItemAppearance
-        appearance.backgroundColor = .systemBlue
+            let appearance = UITabBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.stackedLayoutAppearance = tabBarItemAppearance
+            appearance.backgroundColor = .systemBlue
 
-        UITabBar.appearance().standardAppearance = appearance
-        if #available(iOS 15.0, *) {
+            UITabBar.appearance().standardAppearance = appearance
             UITabBar.appearance().scrollEdgeAppearance = appearance
         }
     }
