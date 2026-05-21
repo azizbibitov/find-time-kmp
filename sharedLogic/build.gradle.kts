@@ -16,6 +16,8 @@ kotlin {
         }
     }
     
+    jvm()
+
     androidLibrary {
        namespace = "com.azico.findtime.sharedLogic"
        compileSdk = libs.versions.android.compileSdk.get().toInt()

@@ -8,12 +8,12 @@ plugins {
 }
 
 kotlin {
-    
+
     androidLibrary {
        namespace = "com.azico.findtime.sharedUI"
        compileSdk = libs.versions.android.compileSdk.get().toInt()
        minSdk = libs.versions.android.minSdk.get().toInt()
-    
+
        compilerOptions {
            jvmTarget = JvmTarget.JVM_11
        }
@@ -24,7 +24,17 @@ kotlin {
            isIncludeAndroidResources = true
        }
     }
-    
+
+    jvm("desktop") {
+        compilations.all {
+            compileTaskProvider.configure {
+                compilerOptions {
+                    jvmTarget.set(JvmTarget.JVM_17)
+                }
+            }
+        }
+    }
+
     sourceSets {
         androidMain.dependencies {
             implementation(libs.compose.uiToolingPreview)
@@ -44,6 +54,11 @@ kotlin {
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+        }
+        val desktopMain by getting {
+            dependencies {
+                implementation(compose.desktop.currentOs)
+            }
         }
     }
 }

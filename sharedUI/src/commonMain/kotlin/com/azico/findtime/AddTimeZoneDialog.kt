@@ -24,8 +24,10 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Dialog
 import kotlinx.coroutines.launch
+
+@Composable
+expect fun AddTimeDialogWrapper(onDismiss: onDismissType, content: @Composable () -> Unit)
 
 fun isSelected(selectedStates: Map<Int, Boolean>, index: Int): Boolean {
     return selectedStates.containsKey(index) && selectedStates[index] == true
@@ -50,10 +52,11 @@ fun getTimezones(selectedStates: Map<Int, Boolean>, timeZoneStrings: List<String
 
 @Composable
 fun AddTimeZoneDialog(
-    timezoneHelper: TimeZoneHelper = TimeZoneHelperImpl(),
     onAdd: OnAddType,
     onDismiss: onDismissType
-) = Dialog(onDismissRequest = onDismiss) {
+) {
+    val timezoneHelper: TimeZoneHelper = TimeZoneHelperImpl()
+    AddTimeDialogWrapper(onDismiss) {
     Surface(
         border = BorderStroke(width = 1.dp, color = Color.Black),
         shape = RoundedCornerShape(8.dp),
@@ -151,5 +154,6 @@ fun AddTimeZoneDialog(
                 }
             }
         }
+    }
     }
 }

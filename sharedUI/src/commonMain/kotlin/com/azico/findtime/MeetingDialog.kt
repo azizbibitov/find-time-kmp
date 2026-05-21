@@ -23,13 +23,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Dialog
+
+@Composable
+expect fun MeetingDialogWrapper(onDismiss: onDismissType, content: @Composable () -> Unit)
 
 @Composable
 fun MeetingDialog(
     hours: List<Int>,
-    onDismiss: () -> Unit
-) = Dialog(onDismissRequest = onDismiss) {
+    onDismiss: onDismissType
+) {
+    MeetingDialogWrapper(onDismiss) {
     Surface(
         border = BorderStroke(width = 1.dp, color = Color.Black),
         shape = RoundedCornerShape(8.dp),
@@ -72,5 +75,6 @@ fun MeetingDialog(
                 Text("Done")
             }
         }
+    }
     }
 }
